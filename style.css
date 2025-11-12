@@ -1,24 +1,23 @@
 /* Hilangkan margin dan pastikan layar penuh */
 html, body {
   margin: 0;
-  padding: 0;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
   width: 100vw;
   height: 100vh;
   overflow: hidden;
   background: transparent;
 }
 
-/* Pastikan overlay (gambar, GIF, video, atau canvas) selalu menyesuaikan layar */
 img, video, canvas {
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
-  object-fit: cover; /* atau contain jika ingin proporsional */
-  pointer-events: none; /* biar tidak bisa diklik */
+  width: 105vw;
+  height: 105vh;
+  object-fit: cover;
+  transform: translate(-2.5vw, -2.5vh);
+  pointer-events: none;
 }
-
 /* Untuk teks overlay (jika kamu pakai text marquee atau animasi teks) */
 .text-overlay {
   position: absolute;
