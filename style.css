@@ -1,32 +1,50 @@
-body {
+/* Hilangkan margin dan pastikan layar penuh */
+html, body {
   margin: 0;
-  background: transparent;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
   overflow: hidden;
+  background: transparent;
 }
 
-.overlay {
+/* Pastikan overlay (gambar, GIF, video, atau canvas) selalu menyesuaikan layar */
+img, video, canvas {
   position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-  pointer-events: none;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover; /* atau contain jika ingin proporsional */
+  pointer-events: none; /* biar tidak bisa diklik */
 }
 
-/* Teks berjalan */
-.text-banner {
+/* Untuk teks overlay (jika kamu pakai text marquee atau animasi teks) */
+.text-overlay {
   position: absolute;
-  bottom: 120px;
-  width: 100%;
-  font-family: 'Poppins', sans-serif;
-  font-weight: bold;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
   color: white;
-  text-shadow: 2px 2px 5px black;
-  font-size: 28px;
-  white-space: nowrap;
-  animation: scrollText 15s linear infinite;
+  font-size: 2em;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  background: transparent;
 }
 
-@keyframes scrollText {
-  0% { transform: translateX(100%); }
-  100% { transform: translateX(-100%); }
+/* Jika kamu mau animasi teks berjalan */
+.marquee {
+  position: absolute;
+  bottom: 5%;
+  white-space: nowrap;
+  animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
 }
