@@ -1,24 +1,43 @@
-/* Hilangkan margin dan pastikan layar penuh */
+/* ===== FIX untuk full layar di Android, Streamlabs, dan browser ===== */
 html, body {
   margin: 0;
-  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
-  width: 100vw;
-  height: 100vh;
+  padding: 0;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
   background: transparent;
+  position: fixed;
+  inset: 0;
 }
 
+/* ===== Gambar / Video / Canvas ===== */
 img, video, canvas {
   position: absolute;
   top: 0;
   left: 0;
-  width: 105vw;
+  width: 105vw;           /* Sedikit lebih besar untuk antisipasi potongan bawah */
   height: 105vh;
-  object-fit: cover;
-  transform: translate(-2.5vw, -2.5vh);
-  pointer-events: none;
+  object-fit: cover;       /* Ubah ke 'contain' kalau mau proporsional */
+  transform: translate(-2.5vw, -2.5vh); /* Pusatkan ulang setelah diperbesar */
+  pointer-events: none;    /* Supaya overlay tidak bisa diklik */
 }
-/* Untuk teks overlay (jika kamu pakai text marquee atau animasi teks) */
+
+/* ===== Fix untuk tinggi layar HP Android (Chrome & WebView) ===== */
+@supports (-webkit-touch-callout: none) {
+  html, body {
+    height: -webkit-fill-available;
+  }
+}
+
+/* ===== Safe area padding (buat notch / navbar HP) ===== */
+body {
+  padding: env(safe-area-inset-top)
+           env(safe-area-inset-right)
+           env(safe-area-inset-bottom)
+           env(safe-area-inset-left);
+}
+
+/* ===== (Opsional) Teks Overlay ===== */
 .text-overlay {
   position: absolute;
   top: 0;
@@ -35,7 +54,7 @@ img, video, canvas {
   background: transparent;
 }
 
-/* Jika kamu mau animasi teks berjalan */
+/* ===== (Opsional) Animasi teks berjalan ===== */
 .marquee {
   position: absolute;
   bottom: 5%;
